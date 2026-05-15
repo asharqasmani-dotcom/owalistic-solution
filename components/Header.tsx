@@ -160,7 +160,7 @@ const Header = () => {
 
           {/* CTA inside mobile menu */}
           <li className="mobile-cta-item">
-            <Link href="/contact" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>Start a Project</Link>
+            <Link href="https://calendly.com/asharqasmani/30min" className="btn btn-primary nav-cta-mobile" onClick={closeMenu}>Book a Meeting</Link>
           </li>
         </ul>
 
@@ -187,7 +187,7 @@ const Header = () => {
               </span>
             </span>
           </button>
-          <Link href="/contact" className="btn btn-primary nav-cta" onClick={closeMenu}>Start a Project</Link>
+          <Link href="https://calendly.com/asharqasmani/30min" className="btn btn-primary nav-cta" onClick={closeMenu}>Book a Meeting</Link>
         </div>
 
         <button
