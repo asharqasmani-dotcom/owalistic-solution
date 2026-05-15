@@ -81,10 +81,6 @@ const Header = () => {
           <li>
             <Link href="/" className={`nav-item${isActive('/') ? ' nav-link-active' : ''}`} onClick={closeMenu}>Home</Link>
           </li>
-          <li>
-            <Link href="/case-studies" className={`nav-item${isActive('/case-studies') ? ' nav-link-active' : ''}`} onClick={closeMenu}>Work</Link>
-          </li>
-
           {/* Services — desktop mega menu + mobile accordion */}
           <li className="nav-item has-mega">
             {/* Desktop trigger */}
@@ -92,27 +88,35 @@ const Header = () => {
             <svg className="nav-services-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg>
             <div className="mega-menu">
               <div className="mega-container">
-                <Link href="/services/brand-identity-design" className="mega-card" onClick={closeMenu}>
-                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/brand_identity.png')" }}></div>
+                <Link href="/services/brand-identity" className="mega-card" onClick={closeMenu}>
+                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/Brand identity.png')" }}></div>
                   <div className="mega-overlay"></div>
                   <div className="mega-content">
-                    <h4>Brand &amp; Identity Design</h4>
+                    <h4>Brand Identity</h4>
                     <span className="mega-arrow">→</span>
                   </div>
                 </Link>
-                <Link href="/services/custom-web-development" className="mega-card" onClick={closeMenu}>
-                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/custom_web_dev_2.png')" }}></div>
+                <Link href="/services/website-design" className="mega-card" onClick={closeMenu}>
+                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/Website Design.png')" }}></div>
                   <div className="mega-overlay"></div>
                   <div className="mega-content">
-                    <h4>Custom Web Development</h4>
+                    <h4>Website Design</h4>
                     <span className="mega-arrow">→</span>
                   </div>
                 </Link>
-                <Link href="/services/ecommerce-cms-sites" className="mega-card" onClick={closeMenu}>
-                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/ecommerce.jpg')" }}></div>
+                <Link href="/services/packaging-design" className="mega-card" onClick={closeMenu}>
+                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/Packaging Design.png')" }}></div>
                   <div className="mega-overlay"></div>
                   <div className="mega-content">
-                    <h4>eCommerce &amp; CMS Sites</h4>
+                    <h4>Packaging Design</h4>
+                    <span className="mega-arrow">→</span>
+                  </div>
+                </Link>
+                <Link href="/services/social-media-design" className="mega-card" onClick={closeMenu}>
+                  <div className="mega-bg" style={{ backgroundImage: "url('/assets/Social Media.png')" }}></div>
+                  <div className="mega-overlay"></div>
+                  <div className="mega-content">
+                    <h4>Social Media Design</h4>
                     <span className="mega-arrow">→</span>
                   </div>
                 </Link>
@@ -136,9 +140,10 @@ const Header = () => {
                 </svg>
               </button>
               <ul className={`mobile-services-links${servicesOpen ? ' open' : ''}`}>
-                <li><Link href="/services/brand-identity-design" onClick={closeMenu}>Brand &amp; Identity Design</Link></li>
-                <li><Link href="/services/custom-web-development" onClick={closeMenu}>Custom Web Development</Link></li>
-                <li><Link href="/services/ecommerce-cms-sites" onClick={closeMenu}>eCommerce &amp; CMS Sites</Link></li>
+                <li><Link href="/services/brand-identity" onClick={closeMenu}>Brand Identity</Link></li>
+                <li><Link href="/services/website-design" onClick={closeMenu}>Website Design</Link></li>
+                <li><Link href="/services/packaging-design" onClick={closeMenu}>Packaging Design</Link></li>
+                <li><Link href="/services/social-media-design" onClick={closeMenu}>Social Media Design</Link></li>
               </ul>
             </div>
           </li>

@@ -129,6 +129,8 @@ const customerAvatars = [
   { name: "Elena Walsh",  img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" },
 ];
 
+const WEB3FORMS_ACCESS_KEY = "7bb52ddc-9781-4bbc-8a3f-7223cedd59a0";
+
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", email: "", company: "", type: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -162,19 +164,28 @@ export default function Home() {
     setSendError(null);
 
     try {
-      const res = await fetch("/api/contact", {
+      const body = new FormData();
+      body.append("access_key", WEB3FORMS_ACCESS_KEY);
+      body.append("subject", "New project enquiry from Owalistic website");
+      body.append("name", formData.name);
+      body.append("email", formData.email);
+      body.append("company", formData.company);
+      body.append("project_type", formData.type);
+      body.append("message", formData.message);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body,
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) {
+      if (!res.ok || !data.success) {
         setSendError(data?.error || "Couldn't send your message. Please try again.");
         return;
       }
 
       setSubmitted(true);
+      setFormData({ name: "", email: "", company: "", type: "", message: "" });
     } catch {
       setSendError("Network error. Please try again.");
     } finally {
@@ -200,31 +211,17 @@ export default function Home() {
                 testimonials={[
                   {
                     quote:
-                      "I'm a brand identity, packaging and website designer with 8+ years of experience helping businesses look professional, build trust and present themselves with clarity.",
-                    name: "Ashar",
-                    designation: "Founder · Owlistic Studio",
-                    src: "/assets/321d84f5-9ee2-4b84-aa45-c51f06388667.png",
+                      "I lead the visual direction behind Owlistic Studio, shaping brand identities, packaging, and websites that feel clear, premium, and built around real business goals.",
+                    name: "M. Ashar Qadir",
+                    designation: "Founder · Creative Director",
+                    src: "/assets/founder-ashar.png",
                   },
                   {
                     quote:
-                      "Ashar elevated our brand direction. The final identity felt clean, professional and easy to apply across packaging and digital assets.",
-                    name: "Sophia Okafor",
-                    designation: "Founder · Food Brand",
-                    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=900&auto=format&fit=crop",
-                  },
-                  {
-                    quote:
-                      "Professional, clear and very responsive. The website direction felt modern and matched the brand perfectly from the first round.",
-                    name: "Marcus Reed",
-                    designation: "Business Owner · SaaS",
-                    src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=900&auto=format&fit=crop",
-                  },
-                  {
-                    quote:
-                      "He understood the brief quickly and delivered a polished brand identity that gave the business a stronger first impression.",
-                    name: "Ayesha Khan",
-                    designation: "Startup Founder",
-                    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=900&auto=format&fit=crop",
+                      "I focus on the strategy behind each project, helping turn ideas into clear brand direction, stronger positioning, and digital experiences that connect with the right audience.",
+                    name: "Syed Ibad Haider",
+                    designation: "Founder · Brand Strategist",
+                    src: "/assets/founder-ibad.png",
                   },
                 ]}
                 colors={{
@@ -244,10 +241,10 @@ export default function Home() {
                   <div className="about-circular-head">
                     <span className="pill-tag">ABOUT US</span>
                     <h2 className="about-typing-title">
-                      <span>The voices behind </span>
+                      <span>The People Behind </span>
                       <span className="about-typing-accent">Owlistic Studio</span>
                     </h2>
-                    <p>A small creative team focused on brand identity, packaging and website design — and the clients who&apos;ve grown with us.</p>
+                    <p>A focused creative team building brand identities, packaging systems, and websites that help businesses look sharper, feel more trusted, and grow with clarity.</p>
                   </div>
                 }
                 footer={
@@ -461,7 +458,7 @@ export default function Home() {
               </div>
             </div>
             <div className="ba-cta-row">
-              <a href="#contact" className="btn btn-primary">Start Your Transformation</a>
+              <Link href="/contact" className="btn btn-primary">Start Your Transformation</Link>
             </div>
           </div>
         </section>
@@ -574,7 +571,7 @@ export default function Home() {
                 <span className="pill-tag">AGENCY SUPPORT</span>
                 <h2>Extra Design Capacity for Busy Agencies</h2>
                 <p>I support small agencies with white-label brand identity, website design, landing pages, packaging and client design assets when their internal team is busy or needs extra creative capacity.</p>
-                <a href="#contact" className="btn btn-primary as-cta">Discuss Agency Support</a>
+                <Link href="/contact" className="btn btn-primary as-cta">Discuss Agency Support</Link>
               </div>
               <div className="as-lists">
                 <div className="as-list-block">

@@ -1,94 +1,170 @@
 export type ServiceItem = {
   title: string;
   slug: string;
+  aliases?: string[];
   image: string;
   alt: string;
   cls: string;
+  tag: string;
   short: string;
-  intro: string;
-  provided: string[];
-  impact: string[];
-  technology: string[];
+  description: string;
+  mainHeading: string;
+  includes: string[];
+  helps: string[];
+  tools: string[];
 };
 
 export const services: ServiceItem[] = [
   {
-    title: "Brand & Identity Design",
-    slug: "brand-identity-design",
-    image: "/assets/brand_identity.png",
-    alt: "Brand identity design presentation",
+    title: "Brand Identity",
+    slug: "brand-identity",
+    aliases: ["brand-identity-design"],
+    image: "/assets/Brand identity.png",
+    alt: "Brand identity design system",
     cls: "sp-orange",
-    short: "Custom brand identities ensuring your business stands out.",
-    intro:
-      "We shape the visual and strategic foundation your audience remembers. From logo direction to complete brand systems, we create identities that feel consistent, premium, and ready for every customer touchpoint.",
-    provided: [
-      "Brand discovery, audience positioning, and competitive review",
-      "Logo direction, color palette, typography, and visual language",
-      "Brand guidelines for web, social, print, pitch decks, and campaigns",
-      "Launch-ready creative assets for profiles, banners, ads, and email",
+    tag: "BRAND",
+    short:
+      "Complete visual identity systems that help your business look clear, professional and consistent across every platform.",
+    description:
+      "We shape the visual and strategic foundation of your brand. From logo direction to color palette, typography and brand guidelines, we create identities that feel consistent, premium and ready for real business use.",
+    mainHeading: "Build a visual identity your audience remembers.",
+    includes: [
+      "Logo system",
+      "Color palette",
+      "Typography direction",
+      "Brand guidelines",
+      "Stationery concepts",
+      "Brand mockups",
+      "Visual direction",
     ],
-    impact: [
-      "Builds trust before a visitor reads a word",
-      "Makes marketing more consistent and easier to scale",
-      "Improves recognition across web, social, and sales material",
-      "Gives your team a clear creative system instead of one-off designs",
+    helps: [
+      "Builds trust before visitors read a word",
+      "Makes your brand easier to recognize",
+      "Keeps your visuals consistent everywhere",
+      "Gives your team a clear creative system",
     ],
-    technology: ["Figma", "Adobe Illustrator", "Adobe Photoshop", "Canva-ready systems", "Design tokens"],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Figma",
+      "Brand Guidelines",
+      "Logo Files",
+      "Mockups",
+    ],
   },
   {
-    title: "Custom Web Development",
-    slug: "custom-web-development",
-    image: "/assets/custom_web_dev_2.png",
-    alt: "Custom website development workspace",
+    title: "Website Design",
+    slug: "website-design",
+    aliases: ["custom-web-development"],
+    image: "/assets/Website Design.png",
+    alt: "Modern responsive website design",
     cls: "sp-teal",
-    short: "Bespoke website solutions that drive high conversion rates.",
-    intro:
-      "We design and build fast, responsive websites that turn brand attention into measurable action. Every page is structured around clarity, performance, conversion, and long-term maintainability.",
-    provided: [
-      "Custom landing pages, business websites, and portfolio websites",
-      "Responsive UI across desktop, tablet, and mobile",
-      "Conversion-focused section hierarchy, CTAs, forms, and contact flows",
-      "Performance setup, SEO-friendly structure, analytics, and launch support",
+    tag: "WEB",
+    short:
+      "Modern, responsive and conversion-focused website design that matches your brand and helps visitors take action.",
+    description:
+      "Your website should feel like a natural extension of your brand. We design clean, responsive and conversion-focused websites that improve clarity, build trust and make it easier for visitors to understand your services and contact you.",
+    mainHeading: "Turn your website into a stronger first impression.",
+    includes: [
+      "Homepage design",
+      "Inner page layouts",
+      "Landing pages",
+      "Desktop and mobile UI",
+      "Service sections",
+      "CTA flow",
+      "Contact structure",
     ],
-    impact: [
-      "Turns more visitors into inquiries, bookings, or sales conversations",
-      "Improves credibility with a polished digital presence",
-      "Reduces friction through cleaner navigation and faster pages",
-      "Creates a scalable foundation for future campaigns and content",
+    helps: [
+      "Improves first impression",
+      "Makes services easier to understand",
+      "Creates a better mobile experience",
+      "Helps visitors take the next step",
     ],
-    technology: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    tools: [
+      "Figma",
+      "Responsive UI layouts",
+      "Website mockups",
+      "Section structure",
+      "Design assets",
+      "Developer-ready direction",
+    ],
   },
   {
-    title: "eCommerce & CMS Sites",
-    slug: "ecommerce-cms-sites",
-    image: "/assets/ecommerce.jpg",
-    alt: "Ecommerce website management",
+    title: "Packaging Design",
+    slug: "packaging-design",
+    image: "/assets/Packaging Design.png",
+    alt: "Premium product packaging design",
     cls: "sp-blue",
-    short: "Shopify, Wix, and Squarespace sites that accelerate sales.",
-    intro:
-      "We create online stores and CMS websites that are easy to manage, easy to buy from, and easy to grow. The goal is a smoother customer journey with a backend your team can confidently update.",
-    provided: [
-      "Shopify, Wix, Squarespace, and CMS website setup or redesign",
-      "Product/category structure, collection pages, and checkout flow improvements",
-      "CMS training so your team can update products, blogs, and pages",
-      "Payment, shipping, forms, basic automations, and third-party integrations",
+    tag: "PACKAGE",
+    short:
+      "Thoughtful packaging concepts for labels, boxes, pouches and product presentations that feel polished and market-ready.",
+    description:
+      "Packaging should make your product feel trustworthy and easy to understand. We design packaging that connects with your brand identity, improves product presentation and helps your product stand out across shelves, online stores and launch campaigns.",
+    mainHeading: "Make your product look ready for the market.",
+    includes: [
+      "Box design",
+      "Label design",
+      "Pouch design",
+      "Bottle or jar packaging",
+      "Product mockups",
+      "Print-ready direction",
+      "Packaging presentation",
     ],
-    impact: [
-      "Makes it easier for customers to discover and purchase products",
-      "Improves store trust with stronger visuals and clearer product pages",
-      "Reduces manual work through CMS workflows and integrations",
-      "Supports campaigns, promotions, and seasonal launches with less stress",
+    helps: [
+      "Improves product presentation",
+      "Builds trust with customers",
+      "Makes your product feel more premium",
+      "Keeps packaging aligned with the brand",
     ],
-    technology: ["Shopify", "Wix", "Squarespace", "WordPress", "Stripe", "Klaviyo", "Google Analytics"],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Print-ready files",
+      "Packaging mockups",
+      "Label layouts",
+      "Product presentation",
+    ],
+  },
+  {
+    title: "Social Media Design",
+    slug: "social-media-design",
+    image: "/assets/Social Media.png",
+    alt: "Branded social media visuals",
+    cls: "sp-orange",
+    tag: "SOCIAL",
+    short:
+      "Branded social media visuals for posts, stories, campaigns and launch content so your business looks consistent online.",
+    description:
+      "Social media should not feel random from post to post. We create branded visual systems for social media content so your business looks polished, recognizable and aligned with your website, packaging and brand identity.",
+    mainHeading: "Keep your brand consistent online.",
+    includes: [
+      "Instagram posts",
+      "Story templates",
+      "Launch graphics",
+      "Ad creatives",
+      "Promotional banners",
+      "Profile visuals",
+      "Campaign direction",
+    ],
+    helps: [
+      "Keeps your brand consistent online",
+      "Makes content look more professional",
+      "Improves recognition across campaigns",
+      "Saves time with reusable design systems",
+    ],
+    tools: [
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Canva-ready systems",
+      "Social templates",
+      "Post and story layouts",
+      "Campaign graphics",
+    ],
   },
 ];
 
-export const serviceStats = [
-  ["11+ Years", "Digital strategy and delivery experience"],
-  ["800+ Brands", "Trusted by founders, studios, and growth teams"],
-  ["3000+ Projects", "Built across brand, web, and commerce"],
-] as const;
-
 export function getServiceBySlug(slug: string) {
-  return services.find((service) => service.slug === slug);
+  return services.find(
+    (service) => service.slug === slug || service.aliases?.includes(slug),
+  );
 }

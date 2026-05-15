@@ -5,3 +5,4 @@ dist/
 .next/
 out/
 build/
+tsconfig.tsbuildinfo

@@ -294,7 +294,7 @@ export const CircularTestimonials = ({
           justify-content: space-between;
         }
         .name {
-          font-weight: bold;
+          font-weight: 500;
           margin-bottom: 0.25rem;
         }
         .designation {

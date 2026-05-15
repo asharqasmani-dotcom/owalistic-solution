@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface AccordionItem {
   id: number;
@@ -86,8 +87,27 @@ interface HeroAccordionProps {
   customerAvatars: { name: string; img: string }[];
 }
 
+const heroPhrases = [
+  { lines: ["Brand Identity", "Design"], color: "var(--orange)" },
+  { lines: ["Packaging", "Design"], color: "var(--orange)" },
+  { lines: ["Website", "Design"], color: "var(--orange)" },
+  { lines: ["Presentation", "Design"], color: "var(--orange)" },
+  { lines: ["Social Media", "Design"], color: "var(--orange)" },
+];
+
 export function HeroAccordion({ customerAvatars }: HeroAccordionProps) {
   const [activeIndex, setActiveIndex] = useState(2);
+  const [activePhrase, setActivePhrase] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActivePhrase((current) => (current + 1) % heroPhrases.length);
+    }, 2200);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const phrase = heroPhrases[activePhrase];
 
   return (
     <section
@@ -104,35 +124,30 @@ export function HeroAccordion({ customerAvatars }: HeroAccordionProps) {
           {/* ── LEFT ── */}
           <div className="ha-left">
             <h1
+              className="ha-heading"
               style={{
                 fontFamily: "var(--font-primary)",
-                fontSize: "clamp(2.2rem, 3.6vw, 4rem)",
-                fontWeight: 700,
-                lineHeight: 1.06,
-                letterSpacing: "-0.03em",
+                fontWeight: 500,
                 color: "var(--text-primary)",
-                margin: "0 0 20px",
+                margin: 0,
               }}
             >
-              Brand Identity, Packaging and Website Design for Growing Businesses
+              <span className="ha-static-line ha-line-design">Design Solutions</span>
+              <span className="ha-static-line ha-line-growing">for Growing</span>
+              <span className="ha-static-line ha-line-businesses">Businesses</span>
+              <span
+                key={phrase.lines.join("-")}
+                className="ha-rotating-phrase"
+                style={{ color: phrase.color }}
+              >
+                <span className="ha-service-line ha-service-name">{phrase.lines[0]}</span>
+                <span className="ha-service-line ha-service-type">{phrase.lines[1]}</span>
+              </span>
             </h1>
-
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(0.97rem, 1.4vw, 1.08rem)",
-                lineHeight: 1.72,
-                color: "var(--text-secondary)",
-                margin: "0 0 36px",
-                maxWidth: 460,
-              }}
-            >
-              I help startups, local businesses and agencies create clean, professional and consistent brand systems across logos, packaging, websites and digital assets.
-            </p>
 
             <div className="ha-buttons">
               <a href="#work" className="btn btn-primary">View Selected Work</a>
-              <a href="#contact" className="btn btn-outline">Start a Project</a>
+              <Link href="/contact" className="btn btn-outline">Start a Project</Link>
             </div>
           </div>
 
@@ -173,7 +188,7 @@ export function HeroAccordion({ customerAvatars }: HeroAccordionProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontSize: "0.72rem", fontWeight: 700, color: "#fff",
+                  fontSize: "0.72rem", fontWeight: 400, color: "#fff",
                   background: "#1DBF73", textDecoration: "none",
                   padding: "5px 12px", borderRadius: 6,
                   whiteSpace: "nowrap", flexShrink: 0,
