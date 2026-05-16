@@ -81,7 +81,7 @@ body {
   font-weight: 300;
   background-color: var(--app-bg);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
@@ -4973,8 +4973,8 @@ html[data-theme="dark"] .mega-footer {
   }
 
   .logo img, .logo-img {
-    height: 54px !important;
-    max-width: 180px !important;
+    height: 104px !important;
+    max-width: 312px !important;
     transform: none !important;
   }
 
@@ -11111,29 +11111,37 @@ html[data-theme="dark"] .ctc-intake-note {
    Mobile / tablet responsiveness fixes
    ────────────────────────────────────────────────────────────────── */
 
-/* ── 1. Hero accordion image strips ── */
+/* ── 1. Hero accordion — keep horizontal row on all viewports (desktop layout) ── */
 @media (max-width: 1024px) {
   .ha-accordion {
-    height: auto;
-    overflow: visible;
+    flex-direction: row !important;
+    height: 340px !important;
+    overflow: hidden !important;
+    gap: 8px !important;
+  }
+
+  .ha-accordion > div {
+    height: 100% !important;
+    width: auto !important;
+    border-radius: 14px !important;
+  }
+
+  /* Restore desktop label behavior: rotated vertical when collapsed,
+     horizontal at bottom-left when active. The inline styles on the
+     component already handle position via flex-basis/flex-grow. */
+  .ha-accordion span {
+    writing-mode: unset !important;
   }
 }
 
 @media (max-width: 768px) {
-  /* Collapsed strips are slim, just enough to read the service label;
-     active strip expands dramatically like desktop hover does. */
   .ha-accordion {
-    gap: 10px !important;
+    height: 280px !important;
+    gap: 6px !important;
   }
 
   .ha-accordion > div {
-    height: 68px !important;
-    border-radius: 14px !important;
-    transition: height 500ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-  }
-
-  .ha-accordion > div[aria-expanded="true"] {
-    height: 320px !important;
+    border-radius: 12px !important;
   }
 
   .ha-accordion > div img {
@@ -11142,35 +11150,12 @@ html[data-theme="dark"] .ctc-intake-note {
     object-fit: cover !important;
     object-position: center !important;
   }
-
-  /* Service label always horizontal and readable on collapsed strips. */
-  .ha-accordion span {
-    bottom: auto !important;
-    top: 50% !important;
-    left: 18px !important;
-    transform: translateY(-50%) !important;
-    rotate: 0deg !important;
-    writing-mode: horizontal-tb !important;
-    opacity: 1 !important;
-    font-size: 0.95rem !important;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
-
-  /* On the expanded strip, move label to bottom-left like desktop. */
-  .ha-accordion > div[aria-expanded="true"] span {
-    top: auto !important;
-    bottom: 18px !important;
-    transform: none !important;
-    font-size: 1.05rem !important;
-  }
 }
 
 @media (max-width: 480px) {
-  .ha-accordion > div {
-    height: 60px !important;
-  }
-  .ha-accordion > div[aria-expanded="true"] {
-    height: 280px !important;
+  .ha-accordion {
+    height: 240px !important;
+    gap: 4px !important;
   }
 }
 
@@ -11211,82 +11196,67 @@ html[data-theme="dark"] .ctc-intake-note {
   }
 }
 
-/* ── 4. Process pill cards ── */
+/* ── 4. Process pill cards — keep horizontal row on all viewports, scale down ── */
 @media (max-width: 1024px) {
   .proc-flow {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 8px;
   }
 
   .proc-capsule {
-    flex: 0 0 auto;
-    width: 100%;
-    border-radius: 24px;
-    min-height: auto;
-    padding: 24px 24px 28px;
-    /* allow content to be visible without animation jamming it */
-    opacity: 1;
-    transform: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .proc-flow.is-visible .proc-capsule {
-    animation: none;
-    opacity: 1;
-    transform: none;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 380px;
+    padding: 22px 10px 32px;
+    border-radius: 140px;
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
 
   .proc-head-circle {
-    align-self: flex-start;
-    width: 64px;
-    max-width: 64px;
-    height: 64px;
-    flex: 0 0 64px;
-    margin-bottom: 0;
+    align-self: center !important;
+    width: 100% !important;
+    max-width: 90px !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 auto !important;
+    margin-bottom: 14px !important;
   }
 
   .proc-num {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
 
   .proc-body {
-    margin-top: 0;
-    padding: 0;
-    text-align: left;
-    opacity: 1;
-    transform: none;
+    text-align: center;
     flex: 1;
   }
 
-  .proc-flow.is-visible .proc-capsule .proc-body {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
   .proc-body h3 {
-    font-size: 1.05rem;
+    font-size: 0.85rem;
   }
 
   .proc-body p {
-    font-size: 0.9rem;
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 
   .proc-arrow {
     align-self: center;
-    width: 28px;
-    flex: 0 0 28px;
-    transform: rotate(90deg);
-    opacity: 1;
+    width: 18px;
+    flex: 0 0 18px;
+    transform: rotate(0deg) !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
 
   .proc-flow.is-visible .proc-arrow {
-    animation: none;
-    opacity: 1;
-    transform: rotate(90deg);
+    transform: rotate(0deg) !important;
   }
 }
 
@@ -11296,23 +11266,326 @@ html[data-theme="dark"] .ctc-intake-note {
   }
 
   .process-section .proc-head {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+  }
+
+  .proc-flow {
+    gap: 4px;
   }
 
   .proc-capsule {
-    padding: 20px;
-    gap: 16px;
+    min-height: 300px;
+    padding: 16px 6px 22px;
+    border-radius: 110px;
   }
 
   .proc-head-circle {
-    width: 56px;
-    max-width: 56px;
-    height: 56px;
-    flex: 0 0 56px;
+    max-width: 60px !important;
+    margin-bottom: 10px !important;
   }
 
   .proc-num {
     font-size: 1.5rem;
+  }
+
+  .proc-body h3 {
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+  }
+
+  .proc-body p {
+    font-size: 0.6rem;
+    line-height: 1.3;
+  }
+
+  .proc-arrow {
+    width: 12px;
+    flex: 0 0 12px;
+  }
+
+  .proc-arrow svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .proc-flow {
+    gap: 2px;
+  }
+
+  .proc-capsule {
+    min-height: 240px;
+    padding: 12px 4px 18px;
+    border-radius: 80px;
+  }
+
+  .proc-head-circle {
+    max-width: 44px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .proc-num {
+    font-size: 1.1rem;
+  }
+
+  .proc-body h3 {
+    font-size: 0.58rem;
+  }
+
+  .proc-body p {
+    font-size: 0.5rem;
+    line-height: 1.25;
+  }
+
+  .proc-arrow {
+    width: 9px;
+    flex: 0 0 9px;
+  }
+}
+
+/* Hide the original "From Ordinary to Professional" before/after
+   cards section on mobile (replaced by the draggable slider below). */
+@media (max-width: 768px) {
+  .before-after {
+    display: none !important;
+  }
+}
+
+/* ── Before / After Website Comparison Slider — mobile only ── */
+.ba-slider-section {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .ba-slider-section {
+    display: block;
+    padding: 56px 0 72px;
+    background: var(--app-bg);
+  }
+
+  .ba-slider-head {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 8px;
+  }
+
+  .ba-slider-head h2 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin: 0 0 12px;
+  }
+
+  .ba-slider-head p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    margin: 0 auto;
+    max-width: 36ch;
+  }
+
+  .ba-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1448 / 1086;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+    background: #f5f5f5;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    cursor: ew-resize;
+    isolation: isolate;
+  }
+
+  .ba-slider-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .ba-slider-after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    will-change: clip-path;
+  }
+
+  .ba-slider-label {
+    position: absolute;
+    top: 14px;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 999px;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+    z-index: 3;
+  }
+
+  .ba-slider-label-after {
+    left: 14px;
+    background: var(--orange);
+  }
+
+  .ba-slider-label-before {
+    right: 14px;
+  }
+
+  .ba-slider-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #fff;
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 0 18px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+
+  .ba-slider-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+  }
+
+  .ba-slider-handle svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ── Selected Work — horizontal slider on mobile ── */
+.sw-slider-wrap {
+  position: relative;
+}
+
+.sw-slider-btn,
+.sw-slider-dots {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sw-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    grid-template-columns: none !important;
+    gap: 16px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 4px 8px;
+  }
+
+  .sw-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sw-card {
+    flex: 0 0 100%;
+    width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .sw-card:hover {
+    transform: none;
+  }
+
+  .sw-card-img {
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  /* Prev/Next buttons — overlay on top of cards, larger size */
+  .sw-slider-btn {
+    display: inline-flex;
+    position: absolute;
+    top: 32%;
+    transform: translateY(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--text-primary);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    z-index: 5;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+
+  .sw-slider-btn-prev { left: 12px; }
+  .sw-slider-btn-next { right: 12px; }
+
+  .sw-slider-btn:active {
+    transform: translateY(-50%) scale(0.93);
+  }
+
+  .sw-slider-btn:hover {
+    background: var(--orange);
+    color: var(--white);
+    box-shadow: 0 8px 24px rgba(254, 96, 55, 0.4);
+  }
+
+  .sw-slider-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Dots below the slider */
+  .sw-slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 18px;
+  }
+
+  .sw-slider-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--border-soft);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .sw-slider-dot.is-active {
+    background: var(--orange);
+    transform: scale(1.4);
   }
 }
 
@@ -11368,5 +11641,83 @@ html[data-theme="dark"] .ctc-intake-note {
 @media (max-width: 480px) {
   .ft-pattern {
     background-size: 110px auto;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Mobile homepage section consistency
+   Unifies vertical padding, heading sizes, and section header
+   spacing so every section feels like part of the same rhythm.
+   ────────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Equal vertical padding for every homepage section */
+  .about-section,
+  .about-circular,
+  .selected-work,
+  .featured-cs,
+  .ba-slider-section,
+  .services,
+  .agency-support,
+  .proof-section,
+  .process-section,
+  .hp-contact {
+    padding: 64px 0 !important;
+  }
+
+  /* Unified h2 size across all homepage sections */
+  .selected-work h2,
+  .featured-cs h2,
+  .ba-slider-head h2,
+  .services-head h2,
+  .agency-support h2,
+  .proof-section h2,
+  .process-section h2,
+  .hp-contact-info h2,
+  .about-circular-head h2,
+  .as-content h2 {
+    font-size: clamp(1.65rem, 6.5vw, 2.1rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.01em;
+  }
+
+  /* Unified section-header bottom margin */
+  .sw-header,
+  .fcs-header,
+  .services-head,
+  .ba-header,
+  .proof-section .proof-head,
+  .process-section .proc-head {
+    margin-bottom: 28px !important;
+  }
+
+  .fcs-header,
+  .services-head,
+  .ba-header,
+  .ba-slider-head,
+  .proof-section,
+  .process-section .proc-head {
+    text-align: center;
+  }
+
+  /* Unified section intro paragraph */
+  .selected-work .sw-header p,
+  .featured-cs .fcs-header p,
+  .services-head .services-sub,
+  .ba-header p,
+  .ba-slider-head p,
+  .proof-section h2 + p,
+  .process-section .proc-head p {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 36ch;
+  }
+
+  /* Consistent container side padding on mobile */
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
   }
 }

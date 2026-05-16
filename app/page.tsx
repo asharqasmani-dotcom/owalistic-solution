@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { HeroAccordion } from "@/components/ui/interactive-image-accordion";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
+import { SelectedWorkSlider } from "@/components/SelectedWorkSlider";
+import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 
 const projects: { name: string; category: string; desc: string; img: string; color: string; link?: string; video?: string; ratio?: string }[] = [
   {
@@ -321,50 +323,7 @@ export default function Home() {
               </div>
               <Link href="/case-studies" className="btn btn-outline sw-all-btn">View All Work</Link>
             </div>
-            <div className="sw-grid">
-              {projects.map((p, i) => {
-                const projectHref = p.link || "/case-studies";
-                const isExternal = Boolean(p.link);
-                const targetProps = isExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {};
-                return (
-                  <div key={i} className="sw-card">
-                    <a href={projectHref} {...targetProps} className="sw-card-media-link" aria-label={p.name}>
-                      <div className="sw-card-img" style={{ background: p.color, aspectRatio: p.ratio }}>
-                        {p.video ? (
-                          <video
-                            src={p.video}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            preload="metadata"
-                          />
-                        ) : (
-                          <img src={p.img} alt={p.name} />
-                        )}
-                      </div>
-                    </a>
-                    <div className="sw-card-body">
-                      <a href={projectHref} {...targetProps} className="sw-card-text-link">
-                        <span className="sw-tag">{p.category}</span>
-                        <h3 className="sw-title">{p.name}</h3>
-                        <p className="sw-desc">{p.desc}</p>
-                      </a>
-                      <a
-                        href="https://dribbble.com/block_design"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="sw-link"
-                      >
-                        View Portfolio →
-                      </a>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <SelectedWorkSlider projects={projects} />
           </div>
         </section>
 
@@ -460,6 +419,17 @@ export default function Home() {
             <div className="ba-cta-row">
               <Link href="/contact" className="btn btn-primary">Start Your Transformation</Link>
             </div>
+          </div>
+        </section>
+
+        {/* ── 5b. BEFORE / AFTER COMPARISON SLIDER (mobile only) ── */}
+        <section className="ba-slider-section">
+          <div className="container">
+            <div className="ba-slider-head">
+              <h2>Before vs After Website Redesign</h2>
+              <p>See how the old website was transformed into a cleaner, more premium, and conversion-focused design.</p>
+            </div>
+            <BeforeAfterSlider />
           </div>
         </section>
 
