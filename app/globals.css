@@ -6324,29 +6324,27 @@ html[data-theme="dark"] .mega-footer {
 
 .about-luxe-founder-overlay {
   position: absolute;
-  left: 22px;
-  right: 22px;
-  bottom: 22px;
-  padding: 22px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  padding: 9px 12px;
   display: grid;
-  gap: 14px;
-  border-radius: 16px;
-  background: rgba(8, 8, 8, 0.72);
+  gap: 4px;
+  border-radius: 10px;
+  background: rgba(8, 8, 8, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
 }
 
 .about-luxe-founder-overlay > span {
-  font-size: 2.6rem;
-  line-height: 0.55;
-  color: var(--orange);
+  display: none;
 }
 
 .about-luxe-founder-overlay h3 {
-  max-width: 260px;
-  font-size: 1.35rem;
-  line-height: 1.12;
+  max-width: 100%;
+  font-size: 0.82rem;
+  line-height: 1.25;
   color: #fff;
   margin: 0;
 }
@@ -6356,10 +6354,14 @@ html[data-theme="dark"] .mega-footer {
   display: block;
 }
 
+.about-luxe-founder-overlay strong {
+  font-size: 0.78rem;
+}
+
 .about-luxe-founder-overlay small {
-  margin-top: 4px;
+  margin-top: 2px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -11103,4 +11105,243 @@ html[data-theme="dark"] .ctc-intake-note {
   .ctc-types-grid { grid-template-columns: 1fr; }
   .ctc-trust { grid-template-columns: 1fr 1fr; }
   .ctc-trust-card-link { grid-column: 1 / -1; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Mobile / tablet responsiveness fixes
+   ────────────────────────────────────────────────────────────────── */
+
+/* ── 1. Hero accordion image strips ── */
+@media (max-width: 1024px) {
+  .ha-accordion {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Make collapsed strips taller so each image actually shows content,
+     not just a thin crop that can look empty. */
+  .ha-accordion > div {
+    height: 110px !important;
+    border-radius: 14px !important;
+  }
+
+  .ha-accordion > div[aria-expanded="true"] {
+    height: 240px !important;
+  }
+
+  /* Ensure each strip image fully fills with proper cover. */
+  .ha-accordion > div img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ha-accordion > div {
+    height: 96px !important;
+  }
+  .ha-accordion > div[aria-expanded="true"] {
+    height: 200px !important;
+  }
+}
+
+/* ── 3. Fiverr reviews — horizontal scroll on mobile (replaces marquee) ── */
+@media (max-width: 768px) {
+  .fr-marquee-wrap {
+    /* drop the soft-edge mask which can clip cards awkwardly on small screens */
+    -webkit-mask-image: none;
+            mask-image: none;
+    overflow: visible;
+  }
+
+  .fr-marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 4px 16px 16px;
+  }
+
+  .fr-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fr-marquee-track {
+    /* stop the auto-scroll so user can swipe */
+    animation: none !important;
+    width: max-content;
+    gap: 14px;
+  }
+
+  .fr-card {
+    flex: 0 0 280px;
+    width: 280px;
+    min-width: 280px;
+    scroll-snap-align: start;
+  }
+}
+
+/* ── 4. Process pill cards ── */
+@media (max-width: 1024px) {
+  .proc-flow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .proc-capsule {
+    flex: 0 0 auto;
+    width: 100%;
+    border-radius: 24px;
+    min-height: auto;
+    padding: 24px 24px 28px;
+    /* allow content to be visible without animation jamming it */
+    opacity: 1;
+    transform: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .proc-flow.is-visible .proc-capsule {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .proc-head-circle {
+    align-self: flex-start;
+    width: 64px;
+    max-width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    margin-bottom: 0;
+  }
+
+  .proc-num {
+    font-size: 1.8rem;
+  }
+
+  .proc-body {
+    margin-top: 0;
+    padding: 0;
+    text-align: left;
+    opacity: 1;
+    transform: none;
+    flex: 1;
+  }
+
+  .proc-flow.is-visible .proc-capsule .proc-body {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .proc-body h3 {
+    font-size: 1.05rem;
+  }
+
+  .proc-body p {
+    font-size: 0.9rem;
+  }
+
+  .proc-arrow {
+    align-self: center;
+    width: 28px;
+    flex: 0 0 28px;
+    transform: rotate(90deg);
+    opacity: 1;
+  }
+
+  .proc-flow.is-visible .proc-arrow {
+    animation: none;
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .process-section {
+    padding: 80px 0;
+  }
+
+  .process-section .proc-head {
+    margin-bottom: 40px;
+  }
+
+  .proc-capsule {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .proc-head-circle {
+    width: 56px;
+    max-width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+  }
+
+  .proc-num {
+    font-size: 1.5rem;
+  }
+}
+
+/* ── 5. Footer — reduce wordmark pattern and tighten padding on mobile ── */
+@media (max-width: 1024px) {
+  .mega-footer {
+    padding: 80px 0 28px;
+  }
+
+  .ft-pattern {
+    background-size: 200px auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mega-footer {
+    padding: 64px 0 24px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+  }
+
+  .ft-pattern {
+    background-size: 140px auto;
+    opacity: 0.07;
+  }
+
+  .ft-grid {
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+
+  .ft-brand {
+    gap: 14px;
+  }
+
+  .ft-actions {
+    margin-top: 6px;
+  }
+
+  .ft-actions .btn {
+    flex: 1 1 140px;
+    justify-content: center;
+  }
+
+  .ft-bottom {
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ft-pattern {
+    background-size: 110px auto;
+  }
 }
