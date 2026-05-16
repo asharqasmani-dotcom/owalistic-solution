@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     canonical: absoluteUrl("/"),
   },
   icons: {
-    icon: "/assets/owlistic_logo.png",
-    shortcut: "/assets/owlistic_logo.png",
-    apple: "/assets/owlistic_logo.png",
+    icon: "/assets/favicon-owlistic.png",
+    shortcut: "/assets/favicon-owlistic.png",
+    apple: "/assets/favicon-owlistic.png",
   },
   openGraph: {
     type: "website",
